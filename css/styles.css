@@ -1,0 +1,367 @@
+/* PLUMBING_V 1 — reset tecnico canonico (Toolkit/boilerplate/plumbing.css) */
+[hidden] { display: none !important; }
+img { max-width: 100%; height: auto; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ══════════ CICLOSERVICE — vendita e riparazione di biciclette, Viale Corsica 86 ══════════
+   La pagina è fatta dei due segni della loro insegna: lo SCUDO (cielo azzurro, tre punte bianche, il prato verde in diagonale,
+   il ciclista nero in salita) è l'apertura, e la O di CICLO è una ruota che si centra davanti a te (_cls_firma.mjs). Poi il prato
+   verde dell'officina, il giallo del pannello forato del negozio, le foto nella cornice di bici-adesivi della loro vetrina, il cielo
+   delle recensioni sotto le punte, il cartello blu dell'orario, in fondo il pavimento a bolli. Cambay 700 per l'insegna e i titoli,
+   Amaranth per il testo, Rajdhani per le misure e le etichette. */
+:root {
+  --cielo: #00ADF1;
+  --prato: #00A556;
+  --nero: #211F20;
+  --inchiostro: #161616;
+  --bianco: #FFFFFF;
+  --neve: #F3F6F7;
+  --giallo: #E9D46A;
+  --pavimento: #C9CCCB;
+  --blu-cartello: #17407A;
+  --service: #0089BF;
+  --link: #075F86;
+  --grigio: #4E5458;
+  --aperto: #00A556;
+  --f-insegna: 'Cambay', 'Trebuchet MS', Arial, sans-serif;
+  --f-testo: 'Amaranth', 'Trebuchet MS', Arial, sans-serif;
+  --f-misure: 'Rajdhani', 'Arial Narrow', Arial, sans-serif;
+  --gutter: 16px;
+  --testata-h: 68px;
+  --bici: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Crect width='30' height='30' fill='%23fff'/%3E%3Crect x='.5' y='.5' width='29' height='29' fill='none' stroke='%23E1E4E5'/%3E%3Cg fill='none' stroke='%23858B8E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='19' r='4.6'/%3E%3Ccircle cx='21' cy='19' r='4.6'/%3E%3Cpath d='M9 19l3.6-6.4h6.2L21 19M12.6 12.6L15.4 19H9M17.4 10.4h2.8'/%3E%3C/g%3E%3C/svg%3E");
+  --rotella: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='none' stroke='%23211F20' stroke-width='13'/%3E%3Cpath d='M50 12V88M12 50H88M23 23L77 77M77 23L23 77' stroke='%23211F20' stroke-width='7'/%3E%3C/svg%3E");
+}
+@media (min-width: 760px) { :root { --gutter: 24px; } }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--inchiostro); font: 400 1.06rem/1.62 var(--f-testo); font-variant-numeric: lining-nums; background: var(--bianco); }
+a { color: var(--link); }
+b, strong { font-weight: 700; }
+.salta { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; background: #fff; color: #111; text-decoration: none; }
+.salta:focus { top: 10px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+section[id] { scroll-margin-top: calc(var(--testata-h) + 14px); }
+.intero { white-space: nowrap; }
+:focus-visible { outline: 3px solid var(--nero); outline-offset: 3px; }
+.orario :focus-visible, .action-bar :focus-visible, #lightbox :focus-visible { outline-color: #FFFFFF; }
+/* finché i caratteri non arrivano il ripiego è più largo: una parola lunga va a capo invece di uscire (riserva-check, #233) */
+h1, h2, h3 { overflow-wrap: anywhere; }
+
+/* ── l'occhiello: le maiuscole tecniche, con la rotella della O ── */
+.occhio { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 12px; font: 600 1.12rem/1.2 var(--f-misure); letter-spacing: .13em; text-transform: uppercase; color: var(--inchiostro); }
+.occhio::before { content: ''; flex: none; width: 20px; height: 20px; background: var(--rotella) center / contain no-repeat; }
+
+/* ── la testata: l'insegna bianca ── */
+.testata { position: sticky; top: 0; z-index: 50; background: var(--bianco); border-bottom: 3px solid var(--nero); }
+.testata__dentro { display: flex; align-items: center; gap: 10px; max-width: 1280px; margin: 0 auto; padding: 6px var(--gutter); min-height: 65px; }
+.insegna { display: inline-flex; align-items: center; gap: 9px; min-width: 0; text-decoration: none; }
+.insegna__scudo { flex: none; width: 34px; height: 41px; }
+.sc-cielo { fill: var(--cielo); }
+.sc-neve { fill: #FFFFFF; }
+.sc-prato { fill: var(--prato); }
+.sc-bordo { fill: none; stroke: var(--nero); stroke-width: 2.6; stroke-linejoin: round; }
+.insegna__scritta, .piede__insegna { display: inline-flex; align-items: baseline; font: 700 1.62rem/1 var(--f-insegna); letter-spacing: -.005em; white-space: nowrap; }
+.insegna__ciclo { color: var(--nero); }
+.insegna__service { color: var(--service); }
+.insegna__o { flex: none; width: .74em; height: .74em; margin: 0 .03em 0 .02em; align-self: center; position: relative; top: -.06em; }
+.o-gomma { fill: none; stroke: var(--nero); stroke-width: 12; }
+.o-raggi { fill: none; stroke: var(--nero); stroke-width: 3.2; }
+.o-mozzo { fill: var(--nero); }
+.voci { display: none; }
+.testata__azioni { margin-left: auto; display: flex; align-items: center; gap: 6px; flex: none; }
+.lingue { display: flex; }
+.lingue button { min-width: 34px; min-height: 40px; padding: 1px 5px 0; border: 2px solid var(--nero); background: transparent; color: var(--nero); font: 600 1rem var(--f-misure); cursor: pointer; }
+.lingue button + button { border-left: 0; }
+/* la lingua scelta si vede anche all'apertura: .is-on la mette il plumbing solo dopo un clic, aria-pressed c'è già nell'HTML
+   (e il plumbing lo tiene allineato) — 3/10/2026 */
+.lingue button.is-on, .lingue button[aria-pressed="true"] { background: var(--nero); color: #FFFFFF; }
+.chiama { display: none; align-items: center; min-height: 42px; padding: 0 18px; background: var(--nero); color: #FFFFFF; font: 600 1.2rem var(--f-misure); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+.chiama:hover { background: #000; }
+.burger { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 10px; border: 2px solid var(--nero); background: transparent; cursor: pointer; }
+.burger span { display: block; height: 2px; background: var(--nero); transition: transform .2s, opacity .2s; }
+.burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.menu-mobile { position: fixed; top: var(--testata-h); left: 0; right: 0; z-index: 49; max-height: calc(100vh - var(--testata-h)); overflow-y: auto; padding: 10px var(--gutter) 22px; background: var(--bianco); border-bottom: 3px solid var(--nero); box-shadow: 0 14px 24px rgba(0, 0, 0, .22); }
+.menu-mobile a { display: block; padding: 12px 2px 9px; border-bottom: 1px solid #D7DBDD; color: var(--nero); font: 700 1.45rem/1.2 var(--f-insegna); text-decoration: none; }
+.menu-mobile__tel, .menu-mobile__wa { display: flex !important; justify-content: center; gap: 8px; margin-top: 12px; border: 3px solid var(--nero) !important; padding: 12px 8px !important; font: 600 1.25rem/1.2 var(--f-misure) !important; letter-spacing: .06em; text-transform: uppercase; }
+.menu-mobile__tel { background: var(--nero); color: #FFFFFF !important; }
+
+/* ── l'apertura: lo scudo come paesaggio ── */
+.apertura { position: relative; background: var(--cielo); border-bottom: 4px solid var(--nero); overflow: hidden; }
+.apertura__dentro { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; padding: 34px var(--gutter) 0; }
+.titolo { margin: 0 0 16px; font: 700 clamp(2.5rem, 1.5rem + 4.4vw, 5.2rem)/1.02 var(--f-insegna); letter-spacing: -.012em; color: var(--inchiostro); text-wrap: balance; }
+.apertura__frase { max-width: 31em; margin: 0 0 20px; font-size: 1.16rem; }
+/* stato e voto su righe loro: lo stato scritto dal JS è più lungo di quello statico (firma-posto) */
+.apertura__riga { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.voto { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; margin: 0; }
+.voto__n { font: 700 2.4rem/1 var(--f-insegna); color: var(--inchiostro); }
+.stato { display: inline-flex; align-items: center; gap: 9px; margin: 0; font: 600 1.18rem/1.35 var(--f-misure); letter-spacing: .02em; }
+.stato::before { content: ''; width: 11px; height: 11px; border-radius: 50%; background: currentColor; opacity: .5; flex: none; }
+.stato.is-aperto::before { opacity: 1; background: var(--aperto); box-shadow: 0 0 0 3px #FFFFFF; }
+.apertura__azioni { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.bottone { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; max-width: 100%; min-height: 52px; padding: 0 22px; border: 3px solid var(--nero); background: transparent; color: var(--nero); font: 600 1.28rem/1 var(--f-misure); letter-spacing: .07em; text-transform: uppercase; text-align: center; text-decoration: none; cursor: pointer; transition: background .15s, color .15s; }
+.bottone--pieno { background: var(--nero); color: #FFFFFF; }
+.bottone--pieno:hover { background: #000; }
+.bottone--vuoto:hover { background: #FFFFFF; }
+/* sotto i 760 px la foto scende sul paesaggio di 50 px: la testa del ciclista (69 px sotto il bordo del paesaggio) resta a ~19 px
+   dalla didascalia (a −70 la toccava, verifica 3/10/2026) */
+.apertura__foto { position: relative; z-index: 2; margin: 0 0 -50px; max-width: 520px; width: 100%; justify-self: center; }
+.apertura__foto figcaption { display: inline-block; margin-top: 0; padding: 6px 12px 5px; background: var(--bianco); border: 3px solid var(--nero); border-top: 0; color: var(--inchiostro); }
+.paesaggio { position: relative; z-index: 1; display: block; width: 100%; height: clamp(190px, 29vw, 420px); }
+.pa-neve { fill: #FFFFFF; }
+.pa-prato { fill: var(--prato); }
+.pa-ruota { fill: none; stroke: var(--nero); stroke-width: 4; }
+.pa-telaio { fill: none; stroke: var(--nero); stroke-width: 4.2; stroke-linecap: round; stroke-linejoin: round; }
+.pa-corpo { fill: none; stroke: var(--nero); stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; }
+.pa-testa { fill: var(--nero); }
+.pa-sella { fill: none; stroke: var(--nero); stroke-width: 6; stroke-linecap: round; }
+figure { margin: 0; }
+figcaption { margin-top: 10px; font-size: 1rem; line-height: 1.45; color: var(--grigio); }
+.foto { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.foto img { display: block; width: 100%; height: auto; }
+/* la cornice: gli adesivi con la bici attorno al vetro della loro vetrina */
+.cornice { padding: 15px; background: #FFFFFF var(--bici) 0 0 / 30px 30px; border: 3px solid var(--nero); }
+
+/* ── i capitoli ── */
+.capitolo { position: relative; padding: 66px max(var(--gutter), calc((100% - 1180px) / 2)) 66px; }
+.capitolo--bianco { background: var(--bianco); }
+.capitolo__titolo { max-width: 22em; margin: 0 0 18px; font: 700 clamp(2.1rem, 1.45rem + 2.5vw, 3.4rem)/1.06 var(--f-insegna); letter-spacing: -.01em; color: var(--inchiostro); text-wrap: balance; }
+.capitolo__intro { max-width: 40em; margin: 0 0 28px; font-size: 1.12rem; }
+.capitolo__nota { max-width: 48em; margin: 30px 0 0; color: var(--grigio); }
+
+/* la O è una ruota: la centratura */
+.centra { display: grid; gap: 30px; align-items: center; }
+.citazione { max-width: 34em; margin: 0; padding: 4px 0 4px 18px; border-left: 6px solid var(--cielo); }
+.citazione p { margin: 0 0 8px; font-style: italic; font-size: 1.08rem; }
+.citazione footer { font-size: 1rem; color: var(--grigio); }
+.citazione footer b { color: var(--inchiostro); }
+.centra-fig { margin: 0; -webkit-user-select: none; user-select: none; }
+.centra-fig > svg { max-width: 560px; margin: 0 auto; border: 3px solid var(--nero); }
+.centra__didascalia { max-width: 34em; min-height: 4.5em; margin: 14px auto 0; font-size: 1rem; line-height: 1.5; text-align: center; color: var(--grigio); }
+.centra__d { display: none; }
+.centra-fig[data-modo="0"] .centra__d[data-m="0"], .centra-fig[data-modo="1"] .centra__d[data-m="1"] { display: inline; }
+.centra__modi { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px; }
+.centra__modi button { min-height: 46px; padding: 0 24px; border: 3px solid var(--nero); background: transparent; color: var(--nero); font: 600 1.25rem/1 var(--f-misure); letter-spacing: .07em; text-transform: uppercase; cursor: pointer; }
+.centra__modi button:hover { background: var(--neve); }
+.centra__modi button[aria-pressed="true"] { background: var(--nero); color: #FFFFFF; }
+/* senza JS il modo non cambia: i bottoni restano nascosti col loro posto (#240) */
+.no-js .centra__modi { visibility: hidden; }
+
+/* in officina: sul prato, entrando dalla diagonale dello scudo */
+.capitolo--prato { background: var(--prato); color: var(--inchiostro); }
+#officina { clip-path: polygon(0 0, 100% 64px, 100% 100%, 0 100%); padding-top: 112px; }
+.lavori-lista { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 26px; margin: 0; padding: 0; list-style: none; }
+.voce { padding: 14px 0 12px; border-top: 3px solid var(--nero); }
+.voce h3 { display: flex; align-items: flex-start; gap: 9px; margin: 0 0 4px; font: 700 1.36rem/1.15 var(--f-insegna); color: var(--inchiostro); }
+.voce h3::before { content: ''; flex: none; width: 17px; height: 17px; margin-top: .2em; background: var(--rotella) center / contain no-repeat; }
+.voce p { margin: 0; font-size: 1.02rem; }
+.capitolo--prato .capitolo__nota { color: var(--inchiostro); }
+
+/* in negozio: il pannello forato giallo */
+.capitolo--pannello { background-color: var(--giallo); background-image: radial-gradient(circle at 50% 50%, rgba(92, 78, 22, .3) 0 3px, transparent 3.6px); background-size: 24px 24px; border-top: 3px solid var(--nero); border-bottom: 3px solid var(--nero); }
+.negozio { display: grid; gap: 34px; align-items: start; }
+.negozio__cartello { position: relative; max-width: 560px; padding: 30px 24px 24px; background: var(--bianco); border: 3px solid var(--nero); box-shadow: 0 10px 0 rgba(33, 31, 32, .14); }
+.negozio__cartello::before, .negozio__cartello::after { content: ''; position: absolute; top: -12px; width: 14px; height: 22px; border: 3px solid var(--nero); border-bottom: 0; border-radius: 8px 8px 0 0; background: transparent; }
+.negozio__cartello::before { left: 26%; }
+.negozio__cartello::after { right: 26%; }
+.negozio__cartello p { margin: 0 0 14px; }
+.appesi { display: flex; flex-wrap: wrap; gap: 10px 8px; margin: 6px 0 18px; padding: 0; list-style: none; }
+.appesi li { display: inline-flex; align-items: center; gap: 7px; padding: 5px 12px 4px 9px; border: 2px solid var(--nero); font: 600 1.06rem/1.2 var(--f-misure); letter-spacing: .07em; text-transform: uppercase; }
+.appesi li::before { content: ''; width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--nero); flex: none; }
+.negozio__nota { margin-bottom: 0 !important; font-style: italic; }
+.negozio__foto figcaption { display: inline-block; margin-top: 0; padding: 6px 12px 5px; background: var(--bianco); border: 3px solid var(--nero); border-top: 0; color: var(--inchiostro); }
+
+/* dalla nostra pagina: le foto coi cartellini */
+.mosaico { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 26px; }
+.colonna { min-width: 0; }
+.tessera { margin: 0 0 30px; }
+.cartellino { position: relative; display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; max-width: calc(100% - 24px); margin: -26px 0 0 12px; padding: 8px 14px 7px; background: var(--bianco); border: 3px solid var(--nero); color: var(--inchiostro); }
+.cartellino__testo { font: 700 1.1rem/1.25 var(--f-insegna); }
+.cartellino__data { font: 600 1rem/1.3 var(--f-misure); letter-spacing: .06em; text-transform: uppercase; color: var(--grigio); }
+
+/* recensioni: il cielo sotto le punte bianche */
+.capitolo--cielo { background: var(--cielo); color: var(--inchiostro); clip-path: polygon(0 58px, 16% 6px, 29% 46px, 47% 0, 63% 52px, 78% 16px, 90% 44px, 100% 22px, 100% 100%, 0 100%); padding-top: 112px; margin-top: -2px; }
+.voto--sezione { margin: 0 0 26px; }
+.recensioni { display: grid; gap: 16px; margin: 0; padding: 0; list-style: none; }
+/* le schede di una fila hanno la stessa altezza (la griglia le stira) e il nome sta in fondo: niente buchi di cielo fra le file
+   (verifica 3/10/2026); la scheda corta di Naomi sta nell'ultima fila, con quelle più corte */
+.recensione { display: flex; flex-direction: column; margin: 0; padding: 18px 20px 14px; background: #FFFFFF; color: var(--inchiostro); border: 3px solid var(--nero); }
+.recensione__testo { margin: 0 0 12px; font-size: 1.04rem; line-height: 1.6; overflow-wrap: anywhere; }
+.recensione__chi { margin: auto 0 0; font-size: 1rem; line-height: 1.4; color: var(--grigio); }
+.recensione__chi b { display: block; font: 700 1.25rem/1.15 var(--f-insegna); color: var(--inchiostro); }
+.recensioni__nota { max-width: 48em; margin: 22px 0 0; font-size: 1rem; color: var(--inchiostro); }
+.capitolo--cielo a { color: var(--inchiostro); }
+
+/* orari e strada: il cartello blu dell'orario in vetrina */
+.orari-riga { display: grid; gap: 30px; align-items: start; }
+.orario { max-width: 470px; padding: 18px 22px 20px; background: var(--blu-cartello); color: #FFFFFF; border: 3px solid var(--nero); border-radius: 6px; }
+.orario__titolo { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font: 600 1.5rem/1.1 var(--f-misure); letter-spacing: .1em; text-transform: uppercase; }
+.orario__titolo::before { content: ''; flex: none; width: 26px; height: 26px; border: 3px solid #FFFFFF; border-radius: 50%; background: linear-gradient(#FFFFFF, #FFFFFF) 50% 30% / 3px 40% no-repeat, linear-gradient(#FFFFFF, #FFFFFF) 70% 50% / 36% 3px no-repeat; }
+.giorno { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 8px 8px 7px; border-bottom: 1px solid #3D6297; }
+.giorno:last-child { border-bottom: 0; }
+.giorno__nome { font-size: 1.04rem; }
+.giorno__ore { margin-left: auto; white-space: nowrap; font: 600 1.16rem/1.4 var(--f-misure); letter-spacing: .03em; }
+.giorno.is-today { background: rgba(255, 255, 255, .16); }
+.orario .stato { margin-top: 14px; color: #FFFFFF; }
+.orari__nota { margin: 12px 0 0; color: #D9E4F3; font-size: 1rem; }
+.indirizzo { margin: 0 0 20px; }
+.indirizzo div { display: grid; grid-template-columns: 8.4em minmax(0, 1fr); gap: 10px; padding: 9px 0 7px; border-bottom: 1px solid #D5DADC; }
+.indirizzo dt { font: 600 1.12rem/1.45 var(--f-misure); letter-spacing: .07em; text-transform: uppercase; color: var(--link); }
+.indirizzo dd { margin: 0; overflow-wrap: anywhere; }
+.dove__azioni { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.cartina { margin-top: 34px; overflow: hidden; background: #FFFFFF; color: var(--inchiostro); border: 3px solid var(--nero); }
+.cartina a { color: var(--inchiostro); }
+.cartina iframe { display: block; width: 100%; height: 380px; border: 0; }
+/* la nota della mappa a 16 px: sotto i 15 px gli accenti piccoli si perdono (accenti-check, #306) */
+.cartina .mappa-clic__nota { font-size: 1rem; }
+
+/* le domande, sul prato */
+.capitolo--domande { border-top: 4px solid var(--nero); }
+.domande { max-width: 800px; border-top: 3px solid var(--nero); }
+.domanda { border-bottom: 2px solid var(--nero); }
+.domanda summary { position: relative; padding: 14px 36px 10px 2px; font: 700 1.3rem/1.25 var(--f-insegna); color: var(--inchiostro); cursor: pointer; list-style: none; }
+.domanda summary::-webkit-details-marker { display: none; }
+.domanda summary::after { content: '+'; position: absolute; right: 6px; top: 11px; font: 400 1.7rem/1 Arial, sans-serif; color: var(--inchiostro); }
+.domanda[open] summary::after { content: '−'; }
+.domanda p { max-width: 42em; margin: 0 0 16px; }
+
+/* ── la chiusura: il pavimento in gomma a bolli ── */
+.piede { background-color: var(--pavimento); background-image: radial-gradient(circle at 50% 50%, #D7DAD9 0 7px, #B7BBBA 7.6px 9.2px, transparent 9.8px); background-size: 32px 32px; color: var(--inchiostro); border-top: 4px solid var(--nero); }
+.piede__dentro { max-width: 900px; margin: 0 auto; padding: 46px var(--gutter) 100px; text-align: center; }
+.piede__insegna { justify-content: center; max-width: 100%; margin: 0 0 18px; padding: 10px 18px 8px; background: #FFFFFF; border: 3px solid var(--nero); font-size: clamp(2rem, 1.4rem + 3vw, 3.2rem); }
+.piede__dove, .piede__orario, .piede__cred { display: table; margin: 0 auto 8px; padding: 2px 10px; background: rgba(255, 255, 255, .86); overflow-wrap: anywhere; }
+.piede a { color: var(--inchiostro); }
+.piede__cred { max-width: 54em; margin-top: 16px; font-size: 1rem; }
+.piede__su { display: inline-block; padding: 6px 14px; background: #FFFFFF; border: 2px solid var(--nero); text-decoration: none; font: 600 1.1rem var(--f-misure); letter-spacing: .08em; text-transform: uppercase; }
+.freccia { font-family: Arial, sans-serif; }
+
+/* ── reveal (plumbing) ── */
+.js .reveal { opacity: 0; }
+.js .reveal.in-view { opacity: 1; }
+html:not(.js) .reveal { opacity: 1; }
+.reduced-motion .reveal { opacity: 1 !important; }
+
+/* ── la barra e la lightbox ── */
+.action-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: var(--nero); box-shadow: 0 -3px 0 var(--cielo); transform: translateY(110%); transition: transform .25s; }
+.action-bar.is-visible { transform: translateY(0); }
+.action-bar a { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 54px; padding: 0 4px; overflow-wrap: anywhere; text-align: center; color: #FFFFFF; font: 600 1.25rem var(--f-misure); letter-spacing: .07em; text-transform: uppercase; text-decoration: none; }
+.action-bar a:first-child { background: var(--cielo); color: var(--inchiostro); }
+#lightbox { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(16, 18, 20, .95); }
+#lightbox[hidden] { display: none !important; }
+#lightbox img { width: auto; max-width: min(1000px, 100%); max-height: 88vh; }
+#lightboxClose { position: absolute; top: 14px; right: 16px; width: 48px; height: 48px; border: 1px solid rgba(255, 255, 255, .6); border-radius: 50%; background: transparent; color: #fff; font-size: 32px; line-height: 1; cursor: pointer; }
+
+/* ── le larghezze ── */
+@media (max-width: 379px) {
+  .testata__dentro { gap: 6px; }
+  .insegna { gap: 6px; }
+  .insegna__scudo { width: 28px; height: 34px; }
+  .insegna__scritta { font-size: 1.32rem; }
+  .lingue button { min-width: 31px; }
+  .bottone { padding: 0 15px; }
+  .indirizzo div { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  /* a 320 px una casella della barra è larga 106 px: «WHATSAPP» andava a capo («WHATSAP» / «P», 3/10/2026) */
+  .action-bar a { font-size: 1.12rem; letter-spacing: .04em; }
+}
+/* sotto i 340 px la scritta CICLOSERVICE passava 5 px sotto i bottoni della lingua (3/10/2026) */
+@media (max-width: 339px) {
+  .insegna__scritta { font-size: 1.2rem; }
+}
+@media (min-width: 560px) {
+  .lavori-lista { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mosaico { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .colonna:nth-child(3) { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 26px; align-items: start; }
+  /* le puntine (una foto sola nella sua colonna) si allungano quanto le due foto della colonna accanto: la colonna è stirata dalla
+     griglia, la foto riempie la cornice (cover, la gomma con le puntine e la cassetta restano dentro). Prima la colonna finiva
+     139 px sopra le altre (verifica 3/10/2026) */
+  .colonna:nth-child(2) { display: flex; flex-direction: column; }
+  .tessera--b { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .tessera--b .foto { position: relative; flex: 1 1 auto; min-height: 300px; }
+  .tessera--b .foto img { position: absolute; top: 15px; left: 15px; width: calc(100% - 30px); height: calc(100% - 30px); aspect-ratio: auto; object-fit: cover; object-position: 55% 50%; }
+  .tessera--b .cartellino { align-self: flex-start; }
+}
+@media (min-width: 640px) {
+  .chiama { display: inline-flex; }
+}
+/* sul tablet la foto sta a destra: il ciclista dello scudo resta libero sulla sinistra */
+@media (min-width: 560px) and (max-width: 959px) {
+  .apertura__foto { justify-self: end; max-width: 440px; }
+}
+@media (min-width: 760px) {
+  .action-bar { display: none; }
+  .piede__dentro { padding-bottom: 54px; }
+  .recensioni { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apertura__dentro { padding-top: 46px; }
+  .apertura__foto { margin-bottom: -120px; }
+}
+@media (min-width: 960px) {
+  .apertura__dentro { grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); align-items: start; gap: 54px; padding: 58px max(var(--gutter), calc((100% - 1240px) / 2)) 0; }
+  .apertura__testo { padding-bottom: 40px; }
+  .apertura__foto { margin-bottom: -210px; }
+  .centra { grid-template-columns: minmax(0, .85fr) minmax(0, 560px); gap: 54px; }
+  .lavori-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .negozio { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 50px; }
+  .recensioni { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .orari-riga { grid-template-columns: minmax(0, 470px) minmax(0, 1fr); gap: 54px; }
+  .mosaico { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .colonna:nth-child(3) { grid-column: auto; display: block; }
+}
+@media (min-width: 1100px) {
+  .testata__dentro { gap: 16px; }
+  .voci { display: flex; flex-wrap: wrap; gap: 4px 22px; margin-left: 26px; }
+  .voci a { padding: 4px 1px 2px; color: var(--nero); font: 600 1.18rem var(--f-misure); letter-spacing: .08em; text-transform: uppercase; text-decoration: none; }
+  .voci a:hover, .voci a[aria-current="true"] { text-decoration: underline; text-decoration-color: var(--cielo); text-decoration-thickness: 4px; text-underline-offset: 7px; }
+  .burger { display: none; }
+  .lavori-lista { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/*CENTRA*/
+/* la centratura — generato da _cls_firma.mjs: non modificare a mano */
+.centra__svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.cs-fondo { fill: #FFFFFF; }
+.cs-banco { fill: #E7EAEA; }
+.cs-telaio { fill: none; stroke: #211F20; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+.cs-braccio { fill: none; stroke: #9AA1A6; stroke-width: 7; stroke-linecap: round; }
+.cs-base { fill: #211F20; }
+.cs-asse { fill: none; stroke: #211F20; stroke-width: 6; stroke-linecap: round; }
+.cs-raggi { fill: none; stroke: #211F20; stroke-width: 2.2; stroke-linecap: round; }
+.cs-raggi-l { fill: none; stroke: #A9AFB3; stroke-width: 2; stroke-linecap: round; }
+.cs-tirato { fill: none; stroke: #00ADF1; stroke-width: 4.2; stroke-linecap: round; }
+.cs-gomma[data-m="0"] { fill: #211F20; fill-rule: evenodd; }
+.cs-gomma[data-m="1"] { fill: none; stroke: #211F20; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; }
+.cs-lontano { fill: none; stroke: #A9AFB3; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; }
+.cs-valvola { fill: #FFFFFF; stroke: #211F20; stroke-width: 2; }
+.cs-ideale { fill: none; stroke: #00ADF1; stroke-width: 2; stroke-dasharray: 7 7; }
+.cs-mozzo { fill: #211F20; }
+.cs-mozzo-foro { fill: #FFFFFF; }
+.cs-flange { fill: none; stroke: #211F20; stroke-width: 5; stroke-linecap: round; }
+.cs-asta { fill: none; stroke: #211F20; stroke-width: 5; stroke-linecap: round; }
+.cs-quadrante { fill: #FFFFFF; stroke: #211F20; stroke-width: 4; }
+.cs-tacche { fill: none; stroke: #211F20; stroke-width: 1.8; stroke-linecap: round; }
+.cs-zero { fill: none; stroke: #00A556; stroke-width: 3; stroke-linecap: round; }
+.cs-ago { fill: none; stroke: #211F20; stroke-width: 3; stroke-linecap: round; }
+.cs-perno { fill: #211F20; }
+.cs-chiave-disco { fill: #E9D46A; stroke: #211F20; stroke-width: 3; }
+.cs-chiave-tacche { fill: #211F20; }
+.cs-chiave-foro { fill: #211F20; }
+.centra-fig[data-modo="0"] .modo:not([data-m="0"]) { display: none; }
+.centra-fig[data-modo="1"] .modo:not([data-m="1"]) { display: none; }
+.firma-attesa .centra__svg .cs-tirato { opacity: 0; }
+.firma-attesa .centra__svg .cs-gomma[data-m="0"] { d: path("M300 110L316.6 110.7L333 112.9L349.2 116.5L365 121.5L380.3 127.8L395 135.5L409 144.4L422.1 154.5L434.4 165.6L445.5 177.9L455.6 191L464.5 205L472.2 219.7L478.5 235L483.5 250.8L487.1 267L489.3 283.4L490 300L489.3 316.6L487.1 333L483.5 349.2L478.5 365L472.2 380.3L464.5 395L455.6 409L445.5 422.1L434.4 434.4L422.6 446.1L410.4 457.6L397.4 468.8L383.6 479.2L368.7 488.7L352.7 496.7L335.8 502.9L318.1 506.7L300 508L281.9 506.7L264.2 502.9L247.3 496.7L231.3 488.7L216.4 479.2L202.6 468.8L189.6 457.6L177.4 446.1L165.6 434.4L154.5 422.1L144.4 409L135.5 395L127.8 380.3L121.5 365L116.5 349.2L112.9 333L110.7 316.6L110 300L110.7 283.4L112.9 267L116.5 250.8L121.5 235L127.8 219.7L135.5 205L144.4 191L154.5 177.9L165.6 165.6L177.9 154.5L191 144.4L205 135.5L219.7 127.8L235 121.5L250.8 116.5L267 112.9L283.4 110.7ZM300 126L284.8 126.7L269.8 128.6L255 131.9L240.5 136.5L226.5 142.3L213 149.3L200.2 157.5L188.2 166.7L177 177L166.7 188.2L157.5 200.2L149.3 213L142.3 226.5L136.5 240.5L131.9 255L128.6 269.8L126.7 284.8L126 300L126.7 315.2L128.6 330.2L131.9 345L136.5 359.5L142.3 373.5L149.3 387L157.5 399.8L166.7 411.8L176.9 423.1L187.7 433.9L198.8 444.5L210.6 454.9L223.2 464.7L236.8 473.7L251.4 481.3L267 487.1L283.3 490.8L300 492L316.7 490.8L333 487.1L348.6 481.3L363.2 473.7L376.8 464.7L389.4 454.9L401.2 444.5L412.3 433.9L423.1 423.1L433.3 411.8L442.5 399.8L450.7 387L457.7 373.5L463.5 359.5L468.1 345L471.4 330.2L473.3 315.2L474 300L473.3 284.8L471.4 269.8L468.1 255L463.5 240.5L457.7 226.5L450.7 213L442.5 200.2L433.3 188.2L423 177L411.8 166.7L399.8 157.5L387 149.3L373.5 142.3L359.5 136.5L345 131.9L330.2 128.6L315.2 126.7Z"); }
+.firma-attesa .centra__svg .cs-raggi[data-m="0"] { d: path("M300 286L300 124M304.3 286.7L354.4 132.6M308.2 288.7L403.5 157.6M311.3 291.8L442.4 196.5M313.3 295.7L467.4 245.6M314 300L476 300M313.3 304.3L467.4 354.4M311.3 308.2L442.4 403.5M308.2 311.3L404.6 444M304.3 313.3L358.1 478.8M300 314L300 494M295.7 313.3L241.9 478.8M291.8 311.3L195.4 444M288.7 308.2L157.6 403.5M286.7 304.3L132.6 354.4M286 300L124 300M286.7 295.7L132.6 245.6M288.7 291.8L157.6 196.5M291.8 288.7L196.5 157.6M295.7 286.7L245.6 132.6"); }
+.firma-attesa .centra__svg .cs-gomma[data-m="1"] { d: path("M300 118L300 118.7L300 120.8L300 124.2L300 129L300 135.1L300 142.4L300 150.9L300 160.6L300 171.3L300 183L300 195.6L300 209L300.3 223.1L301.9 237.8L304.8 252.9L308.6 268.4L313 284.1L317.4 300L321.2 315.9L324.1 331.6L325.7 347.1L325.9 362.2L324.5 376.9L321.9 391L318.2 404.4L313.9 417L309.5 428.7L305.5 439.4L302.4 449.1L300.5 457.6L300 464.9L300 471L300 475.8L300 479.2L300 481.3L300 482"); }
+.firma-attesa .centra__svg .cs-raggi[data-m="1"] { d: path("M276 300L300 132M324 300L300 140.2M276 300L300 164.1M324 300L300 201.3M276 300L302.9 248.1M324 300L317.4 300M276 300L326 351.9M324 300L317.4 398.7M276 300L302.9 435.9M324 300L300 459.8"); }
+/*/CENTRA*/
+
+/*MAPPACLIC*/
+/* la mappa Google si carica solo al clic (giro privacy 1/10/2026) */
+.mappa-clic { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-height: var(--mappa-h, 320px); box-sizing: border-box; padding: 24px; text-align: center; background: repeating-linear-gradient(0deg, rgba(127, 127, 127, 0.14) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(127, 127, 127, 0.14) 0 1px, transparent 1px 28px); }
+.mappa-clic__velo { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 32em; }
+.mappa-clic__btn { display: inline-block; padding: 0.75em 1.4em; border: 2px solid currentColor; border-radius: 999px; color: inherit; font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none; background: transparent; cursor: pointer; }
+.mappa-clic__btn:hover, .mappa-clic__btn:focus-visible { text-decoration: underline; }
+.mappa-clic__nota { margin: 0; font-size: 0.85em; line-height: 1.45; }
+/*/MAPPACLIC*/
